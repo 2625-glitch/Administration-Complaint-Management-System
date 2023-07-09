@@ -5,7 +5,6 @@ const LocalStrategy = require('passport-local').Strategy;
 
 let User = require('../models/user');
 let Complaint = require('../models/complaint');
-let ComplaintMapping = require('../models/complaint-mapping');
 
 // Home Page - Dashboard
 router.get('/', ensureAuthenticated, (req, res, next) => {
@@ -21,7 +20,14 @@ router.get('/login', (req, res, next) => {
 router.get('/register', (req, res, next) => {
     res.render('register');
 });
-
+//about us
+router.get('/about', (req, res) => {
+  res.render('about');
+});
+//contact us
+router.get('/contactus', (req, res) => {
+  res.render('contactus');
+});
 // Logout
 router.get('/logout', ensureAuthenticated,(req, res, next) => {
     req.logout();
@@ -46,39 +52,7 @@ router.get('/admin', ensureAuthenticated, (req,res,next) => {
 });
 
 
-// Assign the Complaint to Engineer
-router.post('/assign', (req,res,next) => {
-    const complaintID = req.body.complaintID;
-    const engineerName = req.body.engineerName;
 
-    req.checkBody('complaintID', 'Contact field is required').notEmpty();
-    req.checkBody('engineerName', 'Description field is required').notEmpty();
-
-    let errors = req.validationErrors();
-
-    if (errors) {
-        res.render('admin/admin', {
-            errors: errors
-        });
-    } else {
-        const newComplaintMapping = new ComplaintMapping({
-            complaintID: complaintID,
-            engineerName: engineerName,
-        });
-
-        ComplaintMapping.registerMapping(newComplaintMapping, (err, complaint) => {
-            if (err) throw err;
-            req.flash('success_msg', 'You have successfully assigned a complaint to Engineer');
-            res.redirect('/admin');
-        });
-    }
-
-});
-
-// Junior Eng
-router.get('/jeng', ensureAuthenticated, (req,res,next) => {
-    res.render('junior/junior');
-});
 
 //Complaint
 router.get('/complaint', ensureAuthenticated, (req, res, next) => {
@@ -134,7 +108,7 @@ router.post('/register', (req, res, next) => {
     const password = req.body.password;
     const password2 = req.body.password2;
     const role = req.body.role;
-
+    //checking with expresss validations
     req.checkBody('name', 'Name field is required').notEmpty();
     req.checkBody('email', 'Email field is required').notEmpty();
     req.checkBody('email', 'Email must be a valid email address').isEmail();
@@ -221,9 +195,6 @@ router.post('/login', passport.authenticate('local',
         if(req.user.role==='admin'){
             res.redirect('/admin');
         }
-        else if(req.user.role==='jeng'){
-            res.redirect('/jeng');
-        }
         else{
             res.redirect('/');
         }
@@ -239,5 +210,16 @@ function ensureAuthenticated(req, res, next) {
         res.redirect('/login');
     }
 }
+router.get('/viewcomplaint', ensureAuthenticated, (req, res) => {
+  Complaint.find({ username: req.user.username }, (err, complaints) => {
+    if (err) throw err;
+    console.log(req.user); // Log the user object to the console for verification
+    res.render('viewcomplaint', {
+      complaints: complaints,
+      user: req.user
+    });
+  });
+});
+
 
 module.exports = router;

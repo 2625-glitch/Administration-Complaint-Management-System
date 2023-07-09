@@ -25,24 +25,3 @@
   </tbody>
 </table>
 
-<div class="container mt-5 border p-5" style="width:70%">
-    <h2> Assign the Complaint to Engineer</h2>
-    <br>
-    <form method="post" action="/assign">
-    <div class="form-group">
-        <label>Complaint Number</label>
-        <input class="form-control" type="text" name="complaintID" placeholder="Complaint Number">
-    </div>
-    <div class="form-group">
-        <label>Engineer</label>
-        <select name="engineerName" id="engineerName" class="form-control">
-            {{#each engineer}}
-                <option value={{username}}> {{username}} </option>
-            {{/each}}
-        </select>
-    </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-success btn-block">Assign to Engineer</button>
-    </div>
-    </form>
-</div>
