@@ -29,3 +29,4 @@ module.exports.registerComplaint = function (newComplaint, callback) {
 module.exports.getAllComplaints = function(callback){
     Complaint.find(callback);
   }
+  // Start Server
