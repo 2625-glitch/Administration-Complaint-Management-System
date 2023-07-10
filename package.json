@@ -1,5 +1,5 @@
 {
-  "name": "complaint-system",
+  "name": "Administration complaint-system",
   "version": "1.0.0",
   "description": "A simple Complaint System with Auth using Passport",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "complaint",
     "system"
   ],
-  "author": "Jatin Varlyani",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "*",
