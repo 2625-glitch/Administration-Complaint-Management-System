@@ -6,17 +6,18 @@
 <table class="table table-bordered">
     <thead class="table-success">
         <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Contact</th>
-            <th scope="col">Description</th>
+            
+            <th scope="col">BlockName</th>
+            <th scope="col">Complaint Type</th>
+            <th scope="col">Contact Number</th>
+            <th scope="col">Desc</th>
         </tr>
     </thead>
     <tbody>
         {{#each complaints}}
         <tr>
-            <td>{{name}}</td>
-            <td>{{email}}</td>
+            <td>{{blockname}}</td>
+            <td>{{complainttype}}</td>
             <td>{{contact}}</td>
             <td>{{desc}}</td>
         </tr>

@@ -39,15 +39,10 @@ router.get('/logout', ensureAuthenticated,(req, res, next) => {
 router.get('/admin', ensureAuthenticated, (req,res,next) => {
     Complaint.getAllComplaints((err, complaints) => {
         if (err) throw err;
-    
-        User.getEngineer((err, engineer) => {
-            if (err) throw err;
-
             res.render('admin/admin', {
                 complaints : complaints,
-                engineer : engineer,
             });
-        });
+        
     });        
 });
 
@@ -65,13 +60,17 @@ router.get('/complaint', ensureAuthenticated, (req, res, next) => {
 
 //Register a Complaint
 router.post('/registerComplaint', (req, res, next) => {
-    const name = req.body.name;
-    const email = req.body.email;
+
+    const blockname = req.body.blockname;
+    const complainttype = req.body.complainttype;
     const contact = req.body.contact;
     const desc = req.body.desc;
-    
+    const username=req.session.username;
+    console.log(username);
     const postBody = req.body;
     console.log(postBody);
+
+     req.checkBody('blockname', 'blockname field is required').notEmpty();
 
     req.checkBody('contact', 'Contact field is required').notEmpty();
     req.checkBody('desc', 'Description field is required').notEmpty();
@@ -84,10 +83,11 @@ router.post('/registerComplaint', (req, res, next) => {
         });
     } else {
         const newComplaint = new Complaint({
-            name: name,
-            email: email,
+            blockname: blockname,
+            complainttype: complainttype,
             contact: contact,
             desc: desc,
+            username: username 
         });
 
         Complaint.registerComplaint(newComplaint, (err, complaint) => {
@@ -187,11 +187,12 @@ router.post('/login', passport.authenticate('local',
         failureFlash: true 
     
     }), (req, res, next) => {
-    
+        req.session.username = req.user.username;
         req.session.save((err) => {
         if (err) {
             return next(err);
         }
+        
         if(req.user.role==='admin'){
             res.redirect('/admin');
         }

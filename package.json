@@ -11,7 +11,7 @@
     "complaint",
     "system"
   ],
-  "author": "Jatin Varlyani",
+  "author": "Poojitha",
   "license": "ISC",
   "dependencies": {
     "express": "*",
