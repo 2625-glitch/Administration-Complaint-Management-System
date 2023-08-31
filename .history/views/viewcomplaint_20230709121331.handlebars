@@ -1,0 +1,13 @@
+<!-- viewcomplaint.handlebars -->
+
+<h2>Complaints</h2>
+
+{{#if complaints.length}}
+<ul>
+    {{#each complaints}}
+    <li>{{this}}</li>
+    {{/each}}
+</ul>
+{{else}}
+<p>No complaints found.</p>
+{{/if}}
