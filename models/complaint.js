@@ -6,10 +6,10 @@ dbconnect()
 
 // Complaint Schema
 const ComplaintSchema = mongoose.Schema({
-    name: {
+    blockname: {
         type: String
     },
-    email: {
+    complainttype: {
         type: String
     },
     contact: {
@@ -17,6 +17,12 @@ const ComplaintSchema = mongoose.Schema({
     },
     desc: {
         type: String
+    },
+    username:{
+        type:String
+    },
+    status:{
+        type:String
     }
 });
 
