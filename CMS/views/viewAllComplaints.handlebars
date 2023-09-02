@@ -1,0 +1,29 @@
+<h3>Hello {{user.name}} !!!</h3>
+
+<br>
+<br>
+
+<table class="table table-bordered">
+    <thead class="table-success">
+        <tr>
+        
+            <th scope="col">BlockName</th>
+            <th scope="col">Complaint Type</th>
+            <th scope="col">Contact Number</th>
+            <th scope="col">Desc</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each complaints}}
+        <tr>
+            <td>{{blockname}}</td>
+            <td>{{complainttype}}</td>
+            <td>{{contact}}</td>
+            <td>{{desc}}</td>
+            <td>{{status}}</td>
+        </tr>
+        {{/each}}
+
+    </tbody>
+</table>

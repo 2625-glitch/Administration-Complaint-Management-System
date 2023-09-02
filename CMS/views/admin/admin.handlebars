@@ -1,0 +1,102 @@
+<h3>Hello {{user.name}} !!!</h3>
+
+<br>
+<br>
+
+<form>
+  <label for="complaintType">Select Complaint Type:</label>
+  <select id="complaintType" name="complaintType">
+    <option value="all">All</option>
+    <option value="infrastructure">Infrastructure</option>
+    <option value="sanitation">Sanitation</option>
+    <option value="technical">Technical</option>
+    <option value="eletrical">Electrical </option>
+  </select>
+  <button type="button" class="btn btn-success" onclick="filterComplaints()">Filter</button>
+</form>
+
+<table class="table table-bordered">
+  <br>
+  <thead class="table-success">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Block name</th>
+      <th scope="col">Complaint Type</th>
+      <th scope="col">Customer Contact Number</th>
+      <th scope="col">Description</th>
+      <th scope="col">Status</th>
+      
+    </tr>
+  </thead>
+  <tbody id="complaintsTable">
+    {{#each complaints}}
+    <tr>
+      <td>{{_id}}</td>
+      <td>{{blockname}}</td>
+      <td>{{complainttype}}</td>
+      <td>{{contact}}</td>
+      <td>{{desc}}</td>
+     <td>
+        <input type="checkbox" onchange="updateStatus(this, '{{_id}}')" {{#if status}}{{/if}}>
+        <span id="status_{{_id}}">{{status}}</span>
+        {{!-- <input type="button" onsubmit=""> --}}
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<script>
+  function filterComplaints() {
+    const selectedType = document.getElementById('complaintType').value;
+    const complaintsTable = document.getElementById('complaintsTable');
+    const rows = complaintsTable.getElementsByTagName('tr');
+
+    for (let i = 1; i < rows.length; i++) {
+      const complaintType = rows[i].getElementsByTagName('td')[2].innerText.toLowerCase();
+      if (selectedType === 'all' || complaintType === selectedType) {
+        rows[i].style.display = '';
+      } else {
+        rows[i].style.display = 'none';
+      }
+    }
+  }
+ async function updateStatus(checkbox, complaintId) {
+    const status = checkbox.checked ? 'completed' : 'pending';
+    // You can use an API call to update the status in your backend using complaintId and status
+    // Example: make an API call to updateStatusAPI(complaintId, status);
+    const statusElement = document.getElementById(`status_${complaintId}`);
+    if (statusElement) {
+      statusElement.textContent = status;
+    }
+    {{!-- console.log(`Updated status of complaint ${complaintId} to ${status}`); --}}
+     try {
+    // Make an AJAX request to update the status
+    console.log(status);
+    const response = await fetch("/changeStatus", {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ complaintId, status})
+    });
+    console.log(response);
+  const json=await response.json();
+    if (response) {
+     //const statusElement = document.getElementById(`status_${complaintId}`);
+      //if (statusElement) {
+       // statusElement.textContent = status;
+      //} 
+      console.log(`Updated status of complaint ${complaintId} to ${status}`);
+    } else {
+      console.error('Failed to update status');
+    }
+  } catch (error) {
+    console.error('Error while updating status:', error);
+  }
+}
+
+
+    // Make an API call to update the status in the backend
+   
+</script>

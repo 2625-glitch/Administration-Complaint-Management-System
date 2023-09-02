@@ -1,0 +1,203 @@
+<style>
+  /*{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }*/
+  /*body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 95vh;
+        }*/
+  .containers {}
+
+  .container {
+    border: 20px solid rgba(255, 255, 255, .5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+
+    height: 480px;
+    max-width: 650px;
+    padding: 28px;
+    margin: 0, 28px;
+    box-shadow: 0 15px 20px #ABB289;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, .5);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .3);
+    border-radius: 30px;
+    backdrop-filter: blur(20px);
+    transition: transform .18s ease;
+    transform: translateX(0);
+  }
+
+  .registration {
+    /*  padding: 10px;*/
+  }
+
+  h2 {
+    font-size: 26px;
+    font-weight: 600;
+    text-align: left;
+    color: #2f4f4f;
+    padding-bottom: 8px;
+    border-bottom: 1px solid silver;
+  }
+
+  .content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px 0;
+  }
+
+  .form-group {
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    /*padding-bottom: 30px;*/
+  }
+
+  .form-group.form-group:nth-child(2n) {
+    justify-content: end;
+  }
+
+  .form-group label {
+    width: 95%;
+    color: #2f4f4f;
+    font-weight: bold;
+    font-size: 16px;
+    /*  margin-bottom: 10px;*/
+  }
+
+  .form-group input {
+    height: 40px;
+    width: 95%;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+  }
+
+  .form-group input:is(:focus, :valid) {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+
+  }
+
+  .dropdown {
+    width: 95%;
+  }
+
+  .btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    display: block;
+    font-size: 20px;
+    /* color: #fff; */
+    border: none;
+    border-radius: 5px;
+    /* background-image: linear-gradient(to right,#aa076b,#61045f); */
+  }
+
+  .btn:hover {
+    background-position: linear-gradient(to right, #61045f, #aa076b);
+  }
+
+  .havAccount {
+    margin-top: 60px;
+    margin-left: 30px;
+  }
+
+  .havAccount .myButton {
+    margin-top: 10px;
+    padding: 5px;
+    font-size: 20px;
+    margin-left: 15px;
+    color: #fff;
+  }
+   .havAccount .myButton a{
+   text-decoration: none;
+   color: #fff;
+  }
+
+
+  @media(max-width:900px) {
+    .container {
+      min-width: 280px;
+    }
+
+    .content {
+      max-height: 380px;
+      overflow: auto;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+      width: 100%;
+    }
+
+    .form-group:nth-child(2n) {
+      justify-content: space-between;
+    }
+
+    .content::-webkit-scrollbar {
+      width: 0;
+    }
+  }
+</style>
+<form action="/register" method="post" class="cls">
+  <div class="registration">
+    <h2>Registration</h2>
+  </div>
+  <div class="content">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input class="form-control" type="text" name="name" id="name" placeholder="Name" required>
+    </div>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input class="form-control" type="text" name="username" id="username" placeholder="Username" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input class="form-control" type="email" name="email" id="email" placeholder="Email"  required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input class="form-control" type="password" name="password" id="passwordInput" placeholder="Password" required autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label for="password2">Confirm Password</label>
+      <input class="form-control" type="password" name="password2" id="password2" placeholder="Confirm Password" required autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label for="role">Role</label>
+      <select class="form-control dropdown" name="role" id="role" required>
+        <option value="user">User</option>
+        <option value="jeng">Junior Engineer</option>
+        {{!-- <option value="admin">Admin</option> --}}
+      </select>
+    </div>
+    <button class="btn btn-success" type="submit">Register</button>
+    <div class="form-group havAccount">
+      <p>Have an Account?<span><button class="myButton btn-warning btn-sm" ><a href="/login">Login now</a></button></span></p>
+    </div>
+  </div>
+</form>
+
+<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
+<script>
+function togglePasswordVisibility() {
+  const passwordInput = document.getElementById('passwordInput');
+  const toggleIcon = document.querySelector('.toggle-password ion-icon');
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    toggleIcon.setAttribute('name', 'eye-off');
+  } else {
+    passwordInput.type = 'password';
+    toggleIcon.setAttribute('name', 'eye');
+  }
+}
+</script>

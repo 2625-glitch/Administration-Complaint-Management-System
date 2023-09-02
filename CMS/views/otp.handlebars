@@ -1,0 +1,104 @@
+<style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+.input-box {
+    position: relative;
+    display: inline-block;
+}
+
+.input-box input[type="password"] {
+    padding-right: 30px; /* Adjust the padding to make space for the icon */
+}
+
+.icon {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 1;
+}
+
+.profile-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 50px;
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    display: block;
+    align-items: center;
+}
+.profile-container input {
+        width: 90%; /* Set the width to 100% */
+        padding: 8px; /* Add some padding for better appearance */
+        border: 1px solid #ccc; /* Add a border for better visibility */
+        border-radius: 4px; /* Add rounded corners */
+        box-sizing: border-box; /* Include padding and border in width calculation */
+    }
+.profile-info {
+    flex: 2;
+    padding: 20px;
+}
+
+.profile-info h1 {
+    margin-top: 0;
+}
+
+.profile-info p {
+    margin: 5px 0;
+}
+.profile-name {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.profile-name h4 {
+        margin: 0;
+        margin-right: 15px; /* Adjust the right margin as needed */
+    }
+
+.profile-name p {
+    margin: 0;
+}
+  .update-profile-button {
+        margin-top: 20px; /* Add margin above the button */
+        display: block; /* Display the button as a block element */
+        margin-left: auto; /* Automatically align the button to the right */
+        margin-right: auto; /* Automatically align the button to the left */
+        width: 180px;
+    }
+</style>
+    <div class="profile-container">
+            <form method="post" action="/otpCheck">
+        <h3>Verify your email</h3> <br>
+        <p>We sent an email to {{username}}. Enter the verification code to get started. </p>
+        <br>
+        <input type="text" placeholder="Verification Code" id="otp" name="otp">
+        <br> <br>
+              <button type="submit" class="btn btn-success">Submit</button>
+
+            </form>
+
+    </div>
+
+
+<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+<script>
+function togglePasswordVisibility() {
+  const passwordInput = document.getElementById('passwordInput');
+  const toggleIcon = document.querySelector('.toggle-password ion-icon');
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    toggleIcon.setAttribute('name', 'eye-off');
+  } else {
+    passwordInput.type = 'password';
+    toggleIcon.setAttribute('name', 'eye');
+  }
+}
+</script>
+

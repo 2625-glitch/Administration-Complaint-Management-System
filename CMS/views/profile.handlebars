@@ -1,0 +1,77 @@
+<style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.profile-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+}
+
+.profile-info {
+    flex: 2;
+    padding: 20px;
+}
+
+.profile-info h1 {
+    margin-top: 0;
+}
+
+.profile-info p {
+    margin: 5px 0;
+}
+.profile-name {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.profile-name h4 {
+        margin: 0;
+        margin-right: 15px; /* Adjust the right margin as needed */
+    }
+
+.profile-name p {
+    margin: 0;
+}
+  .update-profile-button {
+        margin-top: 20px; /* Add margin above the button */
+        display: block; /* Display the button as a block element */
+        margin-left: auto; /* Automatically align the button to the right */
+        margin-right: auto; /* Automatically align the button to the left */
+        width: 180px;
+    }
+</style>
+    <div class="profile-container">
+        <div class="profile-info">
+            <div class="profile-name">
+                <h4>Name:</h4>
+                <p>{{name}}</p>
+            </div>
+            <br>
+            <div class="profile-name">
+                <h4>UserName:</h4>
+                <p>{{username}}</p>
+            </div>
+            <br>
+            <div class="profile-name">
+                <h4>Email: </h4>
+                <p>{{email}}</p>
+            </div>
+            <br>
+            <div class="profile-name">
+                <h4>Role: </h4>
+                <p>{{role}}</p>
+            </div>
+                <a href="/resetPassword" class="btn btn-success update-profile-button">Reset Password</a>
+                <a href="/updateProfile" class="btn btn-success update-profile-button">Update Profile</a>
+
+    </div>

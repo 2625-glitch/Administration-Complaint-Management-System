@@ -1,0 +1,36 @@
+<form method="post" action="/registerComplaint">
+
+    <h2>Register a Complaint</h2>
+    <div class="form-group">
+        <label>Administration Block</label>
+        <select class="form-control dropdown" name="blockname" id="role" required>
+            <option value="ab1">AB-1</option>
+            <option value="ab2">AB-2 </option>
+            <option value="ab3">AB-3 </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Complaint Type</label>
+        <select class="form-control dropdown" name="complainttype" id="role" >
+            <option value="technical">Technical</option>
+            <option value="eletrical">Electrical </option>
+            <option value="infrastructure">Infrastructure</option>
+            <option value="sanitation">Sanitation</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Your Contact Number</label>
+        <input class="form-control" type="text" name="contact" placeholder="Phone Number">
+    </div>
+    <div class="form-group">
+        <label>Complaint Description</label>
+        <textarea type="text" class="form-control" name="desc" cols="30" rows="10" placeholder="Enter the Description like room number/section"></textarea>
+    </div>
+    <button class="btn btn-success" type="submit">Submit Complaint</button>
+    <br>
+    <br>
+    Wanna change your mind? <a class="btn btn-warning btn-sm" href="/">Back</a>
+    <br>
+    <br>
+
+</form>
