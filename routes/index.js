@@ -19,7 +19,7 @@ router.get('/index',ensureAuthenticated,(req,res)=>{
 })
 // Login Form
 router.get('/login', (req, res, next) => {
-    res.render('login');
+    res.render('login'); 
 });
 router.get('/profile',ensureAuthenticated, (req,res)=>{
     res.render('profile')
@@ -107,10 +107,9 @@ router.post('/registerComplaint',ensureAuthenticated, async(req, res, next) => {
         Complaint.registerComplaint(newComplaint, async(err, complaint) => {
             if (err) throw err;
             req.flash('success_msg', 'You have successfully launched a complaint');
-            // console.log(user.name);
             res.redirect('/');
             // Send an email to the admin
-        var adminEmail = 'b181241@rgukt.ac.in'; // Replace with actual admin email
+        var adminEmail = 'poojithavennapureddy@gmail.com'; // Replace with actual admin email
         var subject = 'New Complaint Registered';
         var text = `A new complaint has been registered with the following details:\n
             Block name: ${blockname}\n
@@ -121,7 +120,6 @@ router.post('/registerComplaint',ensureAuthenticated, async(req, res, next) => {
             
         try {
             await sendEmail(adminEmail, subject, text);
-            console.log("ani")
             req.flash('success_msg', 'You have successfully launched a complaint and an email has been sent to the admin.');
             // res.redirect('/');
         } catch (emailError) {
@@ -140,7 +138,6 @@ router.post('/registerComplaint',ensureAuthenticated, async(req, res, next) => {
             
         try {
             await sendEmail(email, subject, text);
-            console.log("ani")
             req.flash('success_msg', 'You have successfully launched a complaint and an email has been sent to the admin.');
             // res.redirect('/');
         } catch (emailError) {
@@ -242,8 +239,8 @@ router.post('/updateProfile', async(req, res, next) => {
     catch (error) { 
         
         console.log('error',error.message)
-        // req.flash('error_msg', error.message);
-        // res.redirect('/index');
+        req.flash('error_msg', error.message);
+        res.redirect('/index');
     }
 }});
 
@@ -326,7 +323,7 @@ function ensureAuthenticated(req, res, next) {
 router.get('/viewcomplaint', ensureAuthenticated, (req, res) => {
   Complaint.find({ username: req.sessoin.username }, (err, complaints) => {
     if (err) throw err;
-    console.log(req.user); // Log the user object to the console for verification
+    console.log(req.user); 
     res.render('viewcomplaint', {
       complaints: complaints,
       user: req.user
@@ -347,9 +344,9 @@ router.get('/viewYourComplaints', ensureAuthenticated, (req, res) => {
   
   
       router.get('/viewAllComplaints', ensureAuthenticated, (req, res) => {
-          Complaint.find({}, (err, complaints) => { // Passing an empty object to find retrieves all documents
+          Complaint.find({}, (err, complaints) => { 
             if (err) throw err;
-            console.log(req.user); // Log the user object to the console for verification
+            console.log(req.user); 
             res.render('viewAllComplaints', {
               complaints: complaints,
               user: req.user
@@ -357,4 +354,3 @@ router.get('/viewYourComplaints', ensureAuthenticated, (req, res) => {
           });
         });
 module.exports = router;
-// Start Server
